@@ -1,0 +1,73 @@
+<div class="container mt-5">
+      <h4 style="font-weight: 500;">Search Books Record</h4>
+      <div class="row">
+        <div class="col-3 col-md-3">
+       
+          <div class="form-group">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Book Name</mat-label>
+              <input matInput  name="name" #nameCtrl="ngModel" 
+              [(ngModel)]="searchParams.name" placeholder="Book Name" >
+              <mat-icon matSuffix>book</mat-icon>
+              <mat-hint>Edit book name</mat-hint>
+            </mat-form-field>        
+          </div>
+        </div>
+        <div class="col-3 col-md-3">
+            <div class="form-group">
+                <mat-form-field  class="example-full-width"  appearance="outline">
+                  <mat-label >Author</mat-label>
+                  <input matInput  name="author"  #authorCtrl="ngModel"
+                  [(ngModel)]="searchParams.author" placeholder="Author Name"  >
+                  <mat-icon matSuffix>man</mat-icon>
+                  <mat-hint>Enter author name</mat-hint>
+                </mat-form-field>        
+              </div>
+        </div>
+ 
+        <div class="col-3 col-md-3">
+        <div class="form-group">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Select Category</mat-label>
+              <mat-select  name="genre" #name=ngModel 
+              [(ngModel)]="searchParams.genre" >
+              <mat-option selected>Category</mat-option>
+                <mat-option value="Novel" >Novel</mat-option>
+                <mat-option value="Science Fiction">Science Fiction</mat-option>
+                <mat-option value="Biography">Biography</mat-option>
+              </mat-select>
+            </mat-form-field>
+            </div>
+            </div>
+   
+      
+        <div class="col-3 col-md-3 pt-3">
+          <button mat-raised-button  color="warn" (click)="onSearchBook()">Search</button>
+        </div>
+      </div>
+ 
+    <section *ngIf="books">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Author</th>
+            <th scope="col">Genres</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+     <tbody *ngIf="!isSearchEmpty; else noSearch">
+            <tr *ngFor="let book of books; index as i">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ book.name }}</td>
+              <td>{{ book.author }}</td>
+              <td>{{ book.genre }}</td>
+              <td>{{ book.price }}</td>
+            </tr>
+          </tbody>
+      </table>
+  
+      <ng-template #noSearch> Search result not found ! </ng-template>
+    </section>
+  </div>
